@@ -1,7 +1,9 @@
-package com.luka.model;
+package com.luka.anirest.model;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +41,7 @@ public class Anime implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date startDate;
 
+	@NotBlank(message = "Anime name can not be empty")
 	private String title;
 
 	private String titleNative;

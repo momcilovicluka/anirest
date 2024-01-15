@@ -1,4 +1,4 @@
-package com.luka.model;
+package com.luka.anirest.model;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
@@ -19,6 +19,8 @@ public class Tag implements Serializable {
 	@Id
 	private int idTag;
 
+	private String name;
+
 	private String category;
 
 	private String description;
@@ -28,8 +30,6 @@ public class Tag implements Serializable {
 	private byte isGeneralSpoiler;
 
 	private byte isMediaSpoiler;
-
-	private String name;
 
 	private int rank;
 

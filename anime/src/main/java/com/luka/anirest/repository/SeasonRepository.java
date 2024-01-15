@@ -1,8 +1,8 @@
-package com.luka.repository;
+package com.luka.anirest.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.luka.model.Season;
+import com.luka.anirest.model.Season;
 
 public interface SeasonRepository extends JpaRepository<Season, Integer> {
 

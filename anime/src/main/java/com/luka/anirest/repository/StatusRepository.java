@@ -1,8 +1,8 @@
-package com.luka.repository;
+package com.luka.anirest.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.luka.model.Status;
+import com.luka.anirest.model.Status;
 
 public interface StatusRepository extends JpaRepository<Status, Integer> {
 

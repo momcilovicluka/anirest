@@ -1,4 +1,4 @@
-package com.luka.model;
+package com.luka.anirest.model;
 
 import java.io.Serializable;
 import jakarta.persistence.*;

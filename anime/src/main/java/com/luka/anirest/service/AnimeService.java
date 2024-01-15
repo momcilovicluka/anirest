@@ -1,4 +1,4 @@
-package com.luka.service;
+package com.luka.anirest.service;
 
 import java.io.IOException;
 import java.net.URI;
@@ -19,22 +19,23 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.luka.model.Anime;
-import com.luka.model.Format;
-import com.luka.model.Genre;
-import com.luka.model.Season;
-import com.luka.model.Status;
-import com.luka.model.Tag;
-import com.luka.model.Type;
-import com.luka.repository.AnimeHasGenreRepository;
-import com.luka.repository.AnimeHasTagRepository;
-import com.luka.repository.AnimeRepository;
-import com.luka.repository.FormatRepository;
-import com.luka.repository.GenreRepository;
-import com.luka.repository.SeasonRepository;
-import com.luka.repository.StatusRepository;
-import com.luka.repository.TagRepository;
-import com.luka.repository.TypeRepository;
+import com.luka.anirest.exception.BadAnilistRequestException;
+import com.luka.anirest.model.Anime;
+import com.luka.anirest.model.Format;
+import com.luka.anirest.model.Genre;
+import com.luka.anirest.model.Season;
+import com.luka.anirest.model.Status;
+import com.luka.anirest.model.Tag;
+import com.luka.anirest.model.Type;
+import com.luka.anirest.repository.AnimeHasGenreRepository;
+import com.luka.anirest.repository.AnimeHasTagRepository;
+import com.luka.anirest.repository.AnimeRepository;
+import com.luka.anirest.repository.FormatRepository;
+import com.luka.anirest.repository.GenreRepository;
+import com.luka.anirest.repository.SeasonRepository;
+import com.luka.anirest.repository.StatusRepository;
+import com.luka.anirest.repository.TagRepository;
+import com.luka.anirest.repository.TypeRepository;
 
 @Service
 public class AnimeService {
@@ -117,7 +118,7 @@ public class AnimeService {
 
 	ObjectMapper objectMapper = new ObjectMapper();
 
-	public HttpResponse<String> returnAnimefromAnilist(String name) {
+	public HttpResponse<String> returnAnimefromAnilist(String name) throws BadAnilistRequestException {
 
 		// Define query variables and values
 		Map<String, Object> variables = new HashMap<>();
@@ -139,20 +140,23 @@ public class AnimeService {
 		HttpResponse<String> response = null;
 		try {
 			response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
+			// if response contains error throw exception
+			if (response.body().contains("errors"))
+				throw new BadAnilistRequestException(response.body(), "Bad request to anilist api");
+		}
+		catch (IOException ioe) {
+			// TODO: handle exception
+		} catch (InterruptedException ie) {
+			// TODO Auto-generated catch block
+			ie.printStackTrace();
+		}
 		System.out.println(response.body());
 
 		return response;
 	}
 
-	public String returnAnimeString(String name) {
+	public String returnAnimeString(String name) throws BadAnilistRequestException {
 		HttpResponse<String> response = returnAnimefromAnilist(name);
 
 		// Use Jackson ObjectMapper to parse the JSON string
@@ -216,7 +220,7 @@ public class AnimeService {
 		return retString.toString();
 	}
 
-	public Anime returnAnime(String name) {
+	public Anime returnAnime(String name) throws BadAnilistRequestException {
 
 		Anime anime = animeRepository.findByTitle(name);
 		if (anime != null)
@@ -316,7 +320,7 @@ public class AnimeService {
 		return anime;
 	}
 
-	public Anime addAnime(String name) {
+	public Anime addAnime(String name) throws BadAnilistRequestException {
 
 		Anime anime = returnAnime(name);
 
