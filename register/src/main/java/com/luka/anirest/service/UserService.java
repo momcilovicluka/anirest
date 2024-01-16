@@ -28,7 +28,7 @@ public class UserService {
 		Optional<User> repoUser = userRepository.findByUsername(user.getUsername());
 
 		if (repoUser.isEmpty()) {
-			User userModel = new User();
+			PasswordlessUser userModel = new PasswordlessUser();
 			userModel.setUsername(user.getUsername());
 			throw new UserNotFoundException(userModel, "The user could not be found in the database");
 		}
@@ -43,7 +43,7 @@ public class UserService {
 
 		Optional<User> repoUser = userRepository.findByUsername(user.getUsername());
 		if (repoUser.isEmpty())
-			throw new UserNotFoundException(user, "The user could not be found in the database");
+			throw new UserNotFoundException(userToPasswordless(user), "The user could not be found in the database");
 
 		return repoUser.get();
 	}

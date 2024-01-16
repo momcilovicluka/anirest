@@ -61,4 +61,8 @@ public class PasswordlessUser {
 		this.email = email;
 	}
 
+	public PasswordlessUser() {
+		// TODO Auto-generated constructor stub
+	}
+
 }

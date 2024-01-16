@@ -1,23 +1,23 @@
 package com.luka.anirest.exception;
 
-import com.luka.anirest.model.User;
+import com.luka.anirest.model.PasswordlessUser;
 
 public class UserNotFoundErrorDetails {
 
 	private final String message;
-	private final User user;
+	private final PasswordlessUser user;
 
-	public UserNotFoundErrorDetails(User user, String message) {
+	public UserNotFoundErrorDetails(PasswordlessUser passwordlessUser, String message) {
 		super();
 		this.message = message;
-		this.user = user;
+		this.user = passwordlessUser;
 	}
 
 	public String getMessage() {
 		return message;
 	}
 
-	public User getUser() {
+	public PasswordlessUser getUser() {
 		return user;
 	}
 
