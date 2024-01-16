@@ -12,5 +12,6 @@ REST api for anime. Faculty project for CBD/RZK
 - **[config-server](/config-server)**: Managing properties for services 🛠
 - **[naming-server](/naming-server)**: Eureka naming server 🗄
 - **[register](/register)**: Login/Register for users 👤
+- **[anirest.postman_collection.json](https://www.postman.com/lukamomcilovic/workspace/anirest/collection/32372801-abd71715-5aad-4eba-9cd5-f6dff30ac14f)**: Import for testing with Postman
 
 Feel free to explore and contribute to the project! If you have any suggestions or improvements, please open an issue or submit a pull request.
