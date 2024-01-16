@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.luka.anirest.exception.AnimeAlreadyExistsException;
 import com.luka.anirest.exception.BadAnilistRequestException;
 import com.luka.anirest.model.Anime;
 import com.luka.anirest.service.AnimeService;
@@ -32,7 +33,8 @@ public class AnimeController {
 	}
 
 	@PostMapping("/addAnime")
-	public Anime addAnime(@RequestBody @Valid Anime anime) throws BadAnilistRequestException {
+	public Anime addAnime(@RequestBody @Valid Anime anime)
+			throws BadAnilistRequestException, AnimeAlreadyExistsException {
 		return animeService.addAnime(anime.getTitle());
 	}
 }

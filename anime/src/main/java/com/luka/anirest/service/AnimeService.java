@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.luka.anirest.exception.AnimeAlreadyExistsException;
 import com.luka.anirest.exception.BadAnilistRequestException;
 import com.luka.anirest.model.Anime;
 import com.luka.anirest.model.Format;
@@ -142,14 +143,12 @@ public class AnimeService {
 			response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
 			// if response contains error throw exception
-			if (response.body().contains("errors"))
+			if (response == null || response.body() == null || response.body().contains("errors"))
 				throw new BadAnilistRequestException(response.body(), "Bad request to anilist api");
-		}
-		catch (IOException ioe) {
-			// TODO: handle exception
+		} catch (IOException ioe) {
+			throw new BadAnilistRequestException(null, "Bad request to anilist api");
 		} catch (InterruptedException ie) {
-			// TODO Auto-generated catch block
-			ie.printStackTrace();
+			throw new BadAnilistRequestException(null, "Bad request to anilist api");
 		}
 		System.out.println(response.body());
 
@@ -320,13 +319,15 @@ public class AnimeService {
 		return anime;
 	}
 
-	public Anime addAnime(String name) throws BadAnilistRequestException {
+	public Anime addAnime(String name) throws BadAnilistRequestException, AnimeAlreadyExistsException {
 
 		Anime anime = returnAnime(name);
 
 		Optional<Anime> repoAnime = animeRepository.findById(anime.getIdAnime());
 		if (repoAnime.isEmpty())
 			animeRepository.save(anime);
+		else
+			throw new AnimeAlreadyExistsException(repoAnime.get(), "This anime already exists");
 
 		return anime;
 	}

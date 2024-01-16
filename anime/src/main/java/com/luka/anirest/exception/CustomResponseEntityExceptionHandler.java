@@ -12,9 +12,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
-	
-	protected ResponseEntity<Object> handleMethodArgumentNotValid( MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-		ValidationErrorEntity vee = new ValidationErrorEntity("Error count: " + ex.getErrorCount() + ". First error: " + ex.getFieldErrors().get(0).getDefaultMessage());
+
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+			HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+		ValidationErrorEntity vee = new ValidationErrorEntity("Error count: " + ex.getErrorCount() + ". First error: "
+				+ ex.getFieldErrors().get(0).getDefaultMessage());
 		return new ResponseEntity<Object>(vee, HttpStatus.BAD_REQUEST);
 	}
 
@@ -23,5 +25,12 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 			WebRequest request) {
 		AnilistErrorDetails ed = new AnilistErrorDetails(ex.getMessage(), ex.getResponseBody());
 		return new ResponseEntity<AnilistErrorDetails>(ed, HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler(AnimeAlreadyExistsException.class)
+	public ResponseEntity<AnimeExistsDetails> handleAnimeAlreadyExistsException(AnimeAlreadyExistsException ex,
+			WebRequest request) {
+		AnimeExistsDetails ed = new AnimeExistsDetails(ex.getAnime(), ex.getMessage());
+		return new ResponseEntity<AnimeExistsDetails>(ed, HttpStatus.CONFLICT);
 	}
 }
