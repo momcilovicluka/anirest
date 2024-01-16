@@ -1,9 +1,7 @@
 package com.luka.anirest.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 public class LoginUser {
 
@@ -16,8 +14,7 @@ public class LoginUser {
 	@NotEmpty(message = "It's not used for identification but i'll make you enter it anyway")
 	private String username;
 
-	@JsonIgnore
-	@Min(value = 8, message = "UwU your passwowd is 2 showt")
+	@Size(min = 8, message = "UwU your passwowd is 2 showt")
 	private String password;
 
 	public String getUsername() {
