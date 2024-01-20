@@ -11,64 +11,87 @@
 			"name": "anime",
 			"item": [
 				{
-					"name": "anime/{name}",
+					"name": "anime/{name}-auth",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzA1NzYxNDgxLCJ1c2VybmFtZSI6ImJhbGRvanNhIiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.vcmFlYWjE7wkvwUoW7FhDbJ0JfuZeHEmfH1MZmalOdY",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:1337/anime/misfit of demon king academy",
+							"raw": "http://localhost:8765/anime/misfit of demon king academy",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "1337",
+							"port": "8765",
 							"path": [
 								"anime",
 								"misfit of demon king academy"
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "anime/{name}",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:1337/anime/neon genesis evangelion",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "1337",
-									"path": [
-										"anime",
-										"neon genesis evangelion"
-									]
-								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": null
+					"response": []
+				},
+				{
+					"name": "anime/{name}-noauth",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8765/anime/misfit of demon king academy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"anime",
+								"misfit of demon king academy"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "anime/{name}-invalid-auth",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "ayJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzA1NzYxNDgxLCJ1c2VybmFtZSI6ImJhbGRvanNhIiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.vcmFlYWjE7wkvwUoW7FhDbJ0JfuZeHEmfH1MZmalOdY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8765/anime/misfit of demon king academy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"anime",
+								"misfit of demon king academy"
+							]
+						}
+					},
+					"response": []
 				},
 				{
 					"name": "anime/addAnime",
@@ -97,72 +120,90 @@
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "Valid",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"title\": \"yu-gi-oh\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:1337/anime/addAnime",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "1337",
-									"path": [
-										"anime",
-										"addAnime"
-									]
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "anime-list",
+			"item": [
+				{
+					"name": "anime-list/create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzA1NzYxNDgxLCJ1c2VybmFtZSI6ImJhbGRvanNhIiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.vcmFlYWjE7wkvwUoW7FhDbJ0JfuZeHEmfH1MZmalOdY",
+									"type": "string"
 								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": null
+							]
 						},
-						{
-							"name": "valid Copy",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"title\": \"\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:1337/anime/addAnime",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "1337",
-									"path": [
-										"anime",
-										"addAnime"
-									]
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Bald lista\",\n  \"description\": \"Lista gde su likovi celavi\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": null
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8765/anime-list/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"anime-list",
+								"create"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "anime-list/addToList",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzA1NzYxNDgxLCJ1c2VybmFtZSI6ImJhbGRvanNhIiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.vcmFlYWjE7wkvwUoW7FhDbJ0JfuZeHEmfH1MZmalOdY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"listId\": 3,\n  \"animeId\": 21087\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8765/anime-list/addToList",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"anime-list",
+								"addToList"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -184,12 +225,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:6969/user/register",
+							"raw": "http://localhost:8765/user/register",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "6969",
+							"port": "8765",
 							"path": [
 								"user",
 								"register"
@@ -212,12 +253,12 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:6969/user/register",
+									"raw": "http://localhost:8765/user/register",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "6969",
+									"port": "8765",
 									"path": [
 										"user",
 										"register"
@@ -244,12 +285,12 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:6969/user/register",
+									"raw": "http://localhost:8765/user/register",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "6969",
+									"port": "8765",
 									"path": [
 										"user",
 										"register"
@@ -268,38 +309,6 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"name\": \"Dalibor\",\n  \"surname\": \"Stakić\",\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:6969/user/register",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "6969",
-									"path": [
-										"user",
-										"register"
-									]
-								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": null
-						},
-						{
-							"name": "user/register",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
 									"raw": "{\n  \"name\": \"Dalibor\",\n  \"surname\": \"Stakić\"\n}",
 									"options": {
 										"raw": {
@@ -308,12 +317,12 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:6969/user/register",
+									"raw": "http://localhost:8765/user/register",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "6969",
+									"port": "8765",
 									"path": [
 										"user",
 										"register"
@@ -340,12 +349,12 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:6969/user/register",
+									"raw": "http://localhost:8765/user/register",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "6969",
+									"port": "8765",
 									"path": [
 										"user",
 										"register"
@@ -358,7 +367,7 @@
 							"body": null
 						},
 						{
-							"name": "user/register",
+							"name": "Empty Username",
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
@@ -372,12 +381,12 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:6969/user/register",
+									"raw": "http://localhost:8765/user/register",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "6969",
+									"port": "8765",
 									"path": [
 										"user",
 										"register"
@@ -404,12 +413,12 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:6969/user/register",
+									"raw": "http://localhost:8765/user/register",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "6969",
+									"port": "8765",
 									"path": [
 										"user",
 										"register"
@@ -436,12 +445,12 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:6969/user/register",
+									"raw": "http://localhost:8765/user/register",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "6969",
+									"port": "8765",
 									"path": [
 										"user",
 										"register"
@@ -470,12 +479,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:6969/user/login",
+							"raw": "http://localhost:8765/user/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "6969",
+							"port": "8765",
 							"path": [
 								"user",
 								"login"
@@ -498,12 +507,109 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:6969/user/login",
+									"raw": "http://localhost:8765/user/login",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "6969",
+									"port": "8765",
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Wrong password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"baldojsa\",\n  \"password\": \"wrongpassword\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8765/user/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8765",
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "auth/login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"baldojsa\",\n  \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8765/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Short password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"baldojsa\",\n  \"password\": \"pass\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8765/user/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8765",
 									"path": [
 										"user",
 										"login"
@@ -530,12 +636,12 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:6969/user/login",
+									"raw": "http://localhost:8765/user/login",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "6969",
+									"port": "8765",
 									"path": [
 										"user",
 										"login"
