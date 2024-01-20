@@ -3,6 +3,7 @@ package com.luka.anirest.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.luka.anirest.exception.UserAlreadyExistsException;
@@ -33,7 +34,7 @@ public class UserService {
 			throw new UserNotFoundException(userModel, "The user could not be found in the database");
 		}
 
-		if (!user.getPassword().equals(repoUser.get().getPassword()))
+		if(!new BCryptPasswordEncoder().matches(user.getPassword(), repoUser.get().getPassword()))
 			throw new WrongPasswordException(userToPasswordless(repoUser.get()), "Bro forgor password 💀");
 
 		return userToPasswordless(repoUser.get());
@@ -54,6 +55,7 @@ public class UserService {
 		try {
 			repoUser = returnUser(user);
 		} catch (UserNotFoundException e) {
+			user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 			userRepository.save(user);
 			return userToPasswordless(user);
 		}
@@ -63,5 +65,9 @@ public class UserService {
 
 		throw new UserAlreadyExistsException(passwordlessUser, passwordlesRepoUser,
 				"The user with the same username already exists in the database");
+	}
+
+	public User returnById(int id) {
+		return userRepository.findById(id).get();
 	}
 }

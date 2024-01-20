@@ -65,4 +65,9 @@ public class PasswordlessUser {
 		// TODO Auto-generated constructor stub
 	}
 
+	public String getRole() {
+		// TODO Auto-generated method stub
+		return "USER";
+	}
+
 }
