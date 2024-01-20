@@ -24,8 +24,8 @@ public class Genre implements Serializable {
 
 	//bi-directional many-to-one association to Anime_has_Genre
 	@JsonIgnore
-	@OneToMany(mappedBy="genre")
-	private List<Anime_has_Genre> animeHasGenres;
+	@ManyToMany(mappedBy="genres")
+	List<Anime> animes;
 
 	public Genre() {
 	}
@@ -46,26 +46,25 @@ public class Genre implements Serializable {
 		this.name = name;
 	}
 
-	public List<Anime_has_Genre> getAnimeHasGenres() {
-		return this.animeHasGenres;
+	public List<Anime> getAnimes() {
+		return this.animes;
 	}
 
-	public void setAnimeHasGenres(List<Anime_has_Genre> animeHasGenres) {
-		this.animeHasGenres = animeHasGenres;
+	public void setAnimes(List<Anime> animes) {
+		this.animes = animes;
 	}
 
-	public Anime_has_Genre addAnimeHasGenre(Anime_has_Genre animeHasGenre) {
-		getAnimeHasGenres().add(animeHasGenre);
-		animeHasGenre.setGenre(this);
+	public Anime addAnime(Anime anime) {
+		getAnimes().add(anime);
+		anime.getGenres().add(this);
 
-		return animeHasGenre;
+		return anime;
 	}
 
-	public Anime_has_Genre removeAnimeHasGenre(Anime_has_Genre animeHasGenre) {
-		getAnimeHasGenres().remove(animeHasGenre);
-		animeHasGenre.setGenre(null);
+	public Anime removeAnime(Anime anime) {
+		getAnimes().remove(anime);
+		anime.getGenres().add(this);
 
-		return animeHasGenre;
+		return anime;
 	}
-
 }

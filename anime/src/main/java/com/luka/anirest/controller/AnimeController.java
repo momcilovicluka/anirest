@@ -31,6 +31,12 @@ public class AnimeController {
 			throws IOException, InterruptedException, BadAnilistRequestException {
 		return animeService.returnAnime(name);
 	}
+	
+	@GetMapping("/byId/{id}")
+	public Anime returnAnime(@PathVariable int id)
+			throws IOException, InterruptedException, BadAnilistRequestException {
+		return animeService.returnAnime(id);
+	}
 
 	@PostMapping("/addAnime")
 	public Anime addAnime(@RequestBody @Valid Anime anime)

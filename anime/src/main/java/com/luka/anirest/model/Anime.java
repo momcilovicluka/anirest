@@ -1,26 +1,31 @@
 package com.luka.anirest.model;
 
 import java.io.Serializable;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-
 import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotBlank;
 
 /**
  * The persistent class for the Anime database table.
  * 
  */
 @Entity
-@NamedQuery(name="Anime.findAll", query="SELECT a FROM Anime a")
+@NamedQuery(name = "Anime.findAll", query = "SELECT a FROM Anime a")
 public class Anime implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	//@GeneratedValue(strategy=GenerationType.IDENTITY)
+	// @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idAnime;
 
 	private int averageScore;
@@ -48,70 +53,37 @@ public class Anime implements Serializable {
 
 	private String titleRomaji;
 
-	//bi-directional many-to-one association to Format
+	// bi-directional many-to-one association to Format
 	@ManyToOne
-	@JoinColumn(name="format_idFormat")
+	@JoinColumn(name = "format_idFormat")
 	private Format format;
 
-	//bi-directional many-to-one association to Season
+	// bi-directional many-to-one association to Season
 	@ManyToOne
-	@JoinColumn(name="Season_idSeason")
+	@JoinColumn(name = "Season_idSeason")
 	private Season season;
 
-	//bi-directional many-to-one association to Status
+	// bi-directional many-to-one association to Status
 	@ManyToOne
-	@JoinColumn(name="Status_idStatus")
+	@JoinColumn(name = "Status_idStatus")
 	private Status status;
 
-	//bi-directional many-to-one association to Type
+	// bi-directional many-to-one association to Type
 	@ManyToOne
-	@JoinColumn(name="Type_idType")
+	@JoinColumn(name = "Type_idType")
 	private Type type;
 
-	//bi-directional many-to-many association to Genre
+	// bi-directional many-to-many association to Genre
 	@ManyToMany
-	@JoinTable(
-		name="Anime_has_Genre"
-		, joinColumns={
-			@JoinColumn(name="Anime_idAnime")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="Genre_idGenre")
-			}
-		)
+	@JoinTable(name = "Anime_has_Genre", joinColumns = { @JoinColumn(name = "Anime_idAnime") }, inverseJoinColumns = {
+			@JoinColumn(name = "Genre_idGenre") })
 	private List<Genre> genres;
 
-	//bi-directional many-to-many association to Tag
+	// bi-directional many-to-many association to Tag
 	@ManyToMany
-	@JoinTable(
-		name="Anime_has_Tag"
-		, joinColumns={
-			@JoinColumn(name="Anime_idAnime")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="Tag_idTag")
-			}
-		)
+	@JoinTable(name = "Anime_has_Tag", joinColumns = { @JoinColumn(name = "Anime_idAnime") }, inverseJoinColumns = {
+			@JoinColumn(name = "Tag_idTag") })
 	private List<Tag> tags;
-
-	//bi-directional many-to-one association to AnimeList_has_Anime
-	@JsonIgnore
-	@OneToMany(mappedBy="anime")
-	private List<AnimeList_has_Anime> animeListHasAnimes;
-
-	//bi-directional many-to-one association to Anime_has_Character
-	@OneToMany(mappedBy="anime")
-	private List<Anime_has_Character> animeHasCharacters;
-
-	//bi-directional many-to-one association to Anime_has_Genre
-	@JsonIgnore
-	@OneToMany(mappedBy="anime")
-	private List<Anime_has_Genre> animeHasGenres;
-
-	//bi-directional many-to-one association to Anime_has_Tag
-	@JsonIgnore
-	@OneToMany(mappedBy="anime")
-	private List<Anime_has_Tag> animeHasTags;
 
 	public Anime() {
 	}
@@ -244,80 +216,6 @@ public class Anime implements Serializable {
 		this.type = type;
 	}
 
-	public List<AnimeList_has_Anime> getAnimeListHasAnimes() {
-		return this.animeListHasAnimes;
-	}
-
-	public void setAnimeListHasAnimes(List<AnimeList_has_Anime> animeListHasAnimes) {
-		this.animeListHasAnimes = animeListHasAnimes;
-	}
-
-	public AnimeList_has_Anime addAnimeListHasAnime(AnimeList_has_Anime animeListHasAnime) {
-		getAnimeListHasAnimes().add(animeListHasAnime);
-		animeListHasAnime.setAnime(this);
-
-		return animeListHasAnime;
-	}
-
-	public AnimeList_has_Anime removeAnimeListHasAnime(AnimeList_has_Anime animeListHasAnime) {
-		getAnimeListHasAnimes().remove(animeListHasAnime);
-		animeListHasAnime.setAnime(null);
-
-		return animeListHasAnime;
-	}
-
-	public List<Anime_has_Character> getAnimeHasCharacters() {
-		return this.animeHasCharacters;
-	}
-
-	public void setAnimeHasCharacters(List<Anime_has_Character> animeHasCharacters) {
-		this.animeHasCharacters = animeHasCharacters;
-	}
-
-	public Anime_has_Character addAnimeHasCharacter(Anime_has_Character animeHasCharacter) {
-		getAnimeHasCharacters().add(animeHasCharacter);
-		animeHasCharacter.setAnime(this);
-
-		return animeHasCharacter;
-	}
-
-	public Anime_has_Character removeAnimeHasCharacter(Anime_has_Character animeHasCharacter) {
-		getAnimeHasCharacters().remove(animeHasCharacter);
-		animeHasCharacter.setAnime(null);
-
-		return animeHasCharacter;
-	}
-
-	public List<Anime_has_Genre> getAnimeHasGenres() {
-		return this.animeHasGenres;
-	}
-
-	public void setAnimeHasGenres(List<Anime_has_Genre> animeHasGenres) {
-		this.animeHasGenres = animeHasGenres;
-	}
-
-	public Anime_has_Genre addAnimeHasGenre(Anime_has_Genre animeHasGenre) {
-		getAnimeHasGenres().add(animeHasGenre);
-		animeHasGenre.setAnime(this);
-
-		return animeHasGenre;
-	}
-
-	public Anime_has_Genre removeAnimeHasGenre(Anime_has_Genre animeHasGenre) {
-		getAnimeHasGenres().remove(animeHasGenre);
-		animeHasGenre.setAnime(null);
-
-		return animeHasGenre;
-	}
-
-	public List<Anime_has_Tag> getAnimeHasTags() {
-		return this.animeHasTags;
-	}
-
-	public void setAnimeHasTags(List<Anime_has_Tag> animeHasTags) {
-		this.animeHasTags = animeHasTags;
-	}
-
 	public List<Genre> getGenres() {
 		return genres;
 	}
@@ -332,20 +230,6 @@ public class Anime implements Serializable {
 
 	public void setTags(List<Tag> tags) {
 		this.tags = tags;
-	}
-
-	public Anime_has_Tag addAnimeHasTag(Anime_has_Tag animeHasTag) {
-		getAnimeHasTags().add(animeHasTag);
-		animeHasTag.setAnime(this);
-
-		return animeHasTag;
-	}
-
-	public Anime_has_Tag removeAnimeHasTag(Anime_has_Tag animeHasTag) {
-		getAnimeHasTags().remove(animeHasTag);
-		animeHasTag.setAnime(null);
-
-		return animeHasTag;
 	}
 
 }

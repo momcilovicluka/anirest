@@ -37,8 +37,8 @@ public class Tag implements Serializable {
 
 	//bi-directional many-to-one association to Anime_has_Tag
 	@JsonIgnore
-	@OneToMany(mappedBy="tag")
-	private List<Anime_has_Tag> animeHasTags;
+	@ManyToMany(mappedBy="tags")
+	private List<Anime> animes;
 
 	public Tag() {
 	}
@@ -115,26 +115,26 @@ public class Tag implements Serializable {
 		this.userId = userId;
 	}
 
-	public List<Anime_has_Tag> getAnimeHasTags() {
-		return this.animeHasTags;
+	public List<Anime> getAnimes() {
+		return this.animes;
 	}
 
-	public void setAnimeHasTags(List<Anime_has_Tag> animeHasTags) {
-		this.animeHasTags = animeHasTags;
+	public void setAnimes(List<Anime> animes) {
+		this.animes = animes;
 	}
 
-	public Anime_has_Tag addAnimeHasTag(Anime_has_Tag animeHasTag) {
-		getAnimeHasTags().add(animeHasTag);
-		animeHasTag.setTag(this);
+	public Anime addAnime(Anime anime) {
+		getAnimes().add(anime);
+		anime.getTags().add(this);
 
-		return animeHasTag;
+		return anime;
 	}
 
-	public Anime_has_Tag removeAnimeHasTag(Anime_has_Tag animeHasTag) {
-		getAnimeHasTags().remove(animeHasTag);
-		animeHasTag.setTag(null);
+	public Anime removeAnime(Anime anime) {
+		getAnimes().remove(anime);
+		anime.getTags().add(this);
 
-		return animeHasTag;
+		return anime;
 	}
 
 }

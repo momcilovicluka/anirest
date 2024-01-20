@@ -28,8 +28,6 @@ import com.luka.anirest.model.Season;
 import com.luka.anirest.model.Status;
 import com.luka.anirest.model.Tag;
 import com.luka.anirest.model.Type;
-import com.luka.anirest.repository.AnimeHasGenreRepository;
-import com.luka.anirest.repository.AnimeHasTagRepository;
 import com.luka.anirest.repository.AnimeRepository;
 import com.luka.anirest.repository.FormatRepository;
 import com.luka.anirest.repository.GenreRepository;
@@ -61,12 +59,6 @@ public class AnimeService {
 
 	@Autowired
 	TagRepository tagRepository;
-
-	@Autowired
-	AnimeHasGenreRepository animeHasGenreRepository;
-
-	@Autowired
-	AnimeHasTagRepository animeHasTagRepository;
 
 	String animeQuery = """
 			query ($name: String) {
@@ -330,5 +322,10 @@ public class AnimeService {
 			throw new AnimeAlreadyExistsException(repoAnime.get(), "This anime already exists");
 
 		return anime;
+	}
+
+	public Anime returnAnime(int id) throws BadAnilistRequestException {
+		Anime anime = animeRepository.findById(id).get();
+		return returnAnime(anime.getTitle());
 	}
 }
