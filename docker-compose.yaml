@@ -1,0 +1,75 @@
+version: '3.7'
+
+services:
+  register:
+    image: momcilovicluka/anirest-register:latest
+    mem_limit: 700m
+    ports:
+      - "6969:6969"
+    networks:
+      - anirest-network
+    depends_on:
+      - naming-server
+      - config-server
+    environment:
+      - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka
+
+  anime:
+    image: momcilovicluka/anirest-anime:latest
+    mem_limit: 700m    
+    ports:
+      - "1337:1337"
+    networks:
+      - anirest-network
+    depends_on:
+      - naming-server
+      - config-server
+    environment:
+      - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka
+
+  anime-list:
+    image: momcilovicluka/anirest-anime-list:latest
+    mem_limit: 700m
+    ports:
+      - "42000:42000"
+    networks:
+      - anirest-network
+    depends_on:
+      - naming-server
+      - config-server
+    environment:
+      - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka
+
+  api-gateway:
+    image: momcilovicluka/anirest-api-gateway:latest
+    mem_limit: 700m
+    ports:
+      - "8765:8765"
+    networks:
+      - anirest-network
+    depends_on:
+      - naming-server
+    environment:
+      - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka
+
+  config-server:
+    image: momcilovicluka/anirest-config-server:latest
+    mem_limit: 700m
+    ports:
+      - "9001:9001"
+    networks:
+      - anirest-network
+    environment:
+      - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka
+
+  naming-server:
+    image: momcilovicluka/anirest-naming-server:latest
+    mem_limit: 700m
+    ports:
+      - "8761:8761"
+    networks:
+      - anirest-network
+
+networks:
+  anirest-network:
+    driver: bridge
