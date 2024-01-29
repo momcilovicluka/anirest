@@ -2,211 +2,12 @@
 	"info": {
 		"_postman_id": "abd71715-5aad-4eba-9cd5-f6dff30ac14f",
 		"name": "anirest",
+		"description": "API Testing",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "32372801",
 		"_collection_link": "https://www.postman.com/lukamomcilovic/workspace/anirest/collection/32372801-abd71715-5aad-4eba-9cd5-f6dff30ac14f?action=share&source=collection_link&creator=32372801"
 	},
 	"item": [
-		{
-			"name": "anime",
-			"item": [
-				{
-					"name": "anime/{name}-auth",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzA1NzYxNDgxLCJ1c2VybmFtZSI6ImJhbGRvanNhIiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.vcmFlYWjE7wkvwUoW7FhDbJ0JfuZeHEmfH1MZmalOdY",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8765/anime/misfit of demon king academy",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8765",
-							"path": [
-								"anime",
-								"misfit of demon king academy"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "anime/{name}-noauth",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8765/anime/misfit of demon king academy",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8765",
-							"path": [
-								"anime",
-								"misfit of demon king academy"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "anime/{name}-invalid-auth",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "ayJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzA1NzYxNDgxLCJ1c2VybmFtZSI6ImJhbGRvanNhIiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.vcmFlYWjE7wkvwUoW7FhDbJ0JfuZeHEmfH1MZmalOdY",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8765/anime/misfit of demon king academy",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8765",
-							"path": [
-								"anime",
-								"misfit of demon king academy"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "anime/addAnime",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"title\": \"misfit of demon king academy\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:1337/anime/addAnime",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "1337",
-							"path": [
-								"anime",
-								"addAnime"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "anime-list",
-			"item": [
-				{
-					"name": "anime-list/create",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzA1NzYxNDgxLCJ1c2VybmFtZSI6ImJhbGRvanNhIiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.vcmFlYWjE7wkvwUoW7FhDbJ0JfuZeHEmfH1MZmalOdY",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"title\": \"Bald lista\",\n  \"description\": \"Lista gde su likovi celavi\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8765/anime-list/create",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8765",
-							"path": [
-								"anime-list",
-								"create"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "anime-list/addToList",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzA1NzYxNDgxLCJ1c2VybmFtZSI6ImJhbGRvanNhIiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.vcmFlYWjE7wkvwUoW7FhDbJ0JfuZeHEmfH1MZmalOdY",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"listId\": 3,\n  \"animeId\": 21087\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8765/anime-list/addToList",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8765",
-							"path": [
-								"anime-list",
-								"addToList"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
 		{
 			"name": "register",
 			"item": [
@@ -654,6 +455,294 @@
 							"body": null
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "anime",
+			"item": [
+				{
+					"name": "anime/{name}-auth",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzA1NzYxNDgxLCJ1c2VybmFtZSI6ImJhbGRvanNhIiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.vcmFlYWjE7wkvwUoW7FhDbJ0JfuZeHEmfH1MZmalOdY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8765/anime/misfit of demon king academy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"anime",
+								"misfit of demon king academy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "anime/{name}-noauth",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8765/anime/misfit of demon king academy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"anime",
+								"misfit of demon king academy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "anime/{name}-invalid-auth",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "ayJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzA1NzYxNDgxLCJ1c2VybmFtZSI6ImJhbGRvanNhIiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.vcmFlYWjE7wkvwUoW7FhDbJ0JfuZeHEmfH1MZmalOdY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8765/anime/misfit of demon king academy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"anime",
+								"misfit of demon king academy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "anime/addAnime",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"misfit of demon king academy\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1337/anime/addAnime",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"anime",
+								"addAnime"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "anime-list",
+			"item": [
+				{
+					"name": "anime-list/create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzA1NzYxNDgxLCJ1c2VybmFtZSI6ImJhbGRvanNhIiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.vcmFlYWjE7wkvwUoW7FhDbJ0JfuZeHEmfH1MZmalOdY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Bald lista\",\n  \"description\": \"Lista gde su likovi celavi\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8765/anime-list/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"anime-list",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "anime-list/lists",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzA2NjQzOTUwLCJ1c2VybmFtZSI6ImJhbGRvanNhIiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.KpJ7eihgTZ_nbBd1KBPl_4P3UrEBfRiPagmh79K5wD0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8765/anime-list/lists",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"anime-list",
+								"lists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "anime-list/addToList",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzA1NzYxNDgxLCJ1c2VybmFtZSI6ImJhbGRvanNhIiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.vcmFlYWjE7wkvwUoW7FhDbJ0JfuZeHEmfH1MZmalOdY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"listId\": 3,\n  \"animeId\": 21087\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8765/anime-list/addToList",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"anime-list",
+								"addToList"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tag",
+			"item": [
+				{
+					"name": "tags/all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8765/tags/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"tags",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tags/page/{page}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8765/tags/page/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"tags",
+								"page",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
