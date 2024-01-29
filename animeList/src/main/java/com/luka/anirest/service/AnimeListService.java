@@ -10,6 +10,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.luka.anirest.dto.ListAnime;
+import com.luka.anirest.exception.AnimeAlreadyOnListException;
+import com.luka.anirest.exception.AnimeListUnexistentException;
+import com.luka.anirest.exception.AnimeUnexistentException;
 import com.luka.anirest.model.Anime;
 import com.luka.anirest.model.AnimeList;
 import com.luka.anirest.model.SimplePrincipal;
@@ -62,7 +65,7 @@ public class AnimeListService {
 		try {			
 			animeList = animeListRepository.findById(listAnime.getListId()).get();
 		} catch (Exception e) {
-			throw new RuntimeException("AnimeList with id " + listAnime.getListId() + " does not exist");
+			throw new AnimeListUnexistentException("AnimeList with id " + listAnime.getListId() + " does not exist");
 		}
 		
 		if(animeList.getUser().getIdUser() != principal.getId())
@@ -72,12 +75,12 @@ public class AnimeListService {
 		try {
 			anime = animeProxy.returnAnime(listAnime.getAnimeId());
 		} catch (Exception e) {
-			throw new RuntimeException("Anime with id " + listAnime.getAnimeId() + " does not exist");
+			throw new AnimeUnexistentException(anime, "Anime with id " + listAnime.getAnimeId() + " does not exist");
 		}
 		
 		for (Anime anime1 : animeList.getAnimes())
 			if(anime1.getIdAnime() == anime.getIdAnime())
-				throw new RuntimeException("Anime " + anime.getTitle() + " is already on the " + animeList.getTitle() + " list");
+				throw new AnimeAlreadyOnListException(anime, "Anime " + anime.getTitle() + " is already on the " + animeList.getTitle() + " list");
 		
 		animeList.setAnimes(new ArrayList<Anime>());
 		anime.setAnimeLists(new ArrayList<AnimeList>());
@@ -85,13 +88,7 @@ public class AnimeListService {
 		animeList.addAnime(anime);
 		anime.addAnimeList(animeList);
 
-		for (AnimeList list : anime.getAnimeLists())
-			System.out.println(list.getTitle());
-
-		for (Anime anime1 : animeList.getAnimes())
-			System.out.println(anime1.getTitle());
-		
-		animeRepository.save(anime);
+		animeProxy.addAnimeEmanuel(anime);
 		
 		return animeListRepository.save(animeList);
 	}

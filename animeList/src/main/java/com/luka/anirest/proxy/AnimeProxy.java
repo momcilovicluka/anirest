@@ -5,6 +5,8 @@ import java.io.IOException;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.luka.anirest.exception.BadAnilistRequestException;
 import com.luka.anirest.model.Anime;
@@ -15,4 +17,7 @@ public interface AnimeProxy {
 	@GetMapping("/byId/{id}")
 	public Anime returnAnime(@PathVariable int id)
 			throws IOException, InterruptedException, BadAnilistRequestException;
+	
+	@PostMapping("/addAnimeEmanuel")
+	public Anime addAnimeEmanuel(@RequestBody Anime anime);
 }
