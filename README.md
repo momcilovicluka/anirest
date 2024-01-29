@@ -14,6 +14,7 @@ REST api for anime. Faculty project for CBD/RZK
 - **[config-server](/config-server)**: Managing properties for services 🛠 ↔ **[🐳 Docker Image](https://hub.docker.com/repository/docker/momcilovicluka/anirest-config-server/general)**
 - **[naming-server](/naming-server)**: Eureka naming server 🗄 ↔ **[🐳 Docker Image](https://hub.docker.com/repository/docker/momcilovicluka/anirest-naming-server/general)**
 - **[register](/register)**: Login/Register for users 👤 ↔ **[🐳 Docker Image](https://hub.docker.com/repository/docker/momcilovicluka/anirest-register/general)**
+- **[tag](/tag)**: Tag service for detailed info about... you guessed it. Tags! 🏷️ ↔ **[🐳 Docker Image](https://hub.docker.com/repository/docker/momcilovicluka/anirest-tag/general)**
 - **[anirest.postman_collection.json](https://www.postman.com/lukamomcilovic/workspace/anirest/collection/32372801-abd71715-5aad-4eba-9cd5-f6dff30ac14f)**: Import for testing with Postman ☑
 - **[docker-compose](/docker-compose.yaml)**: Docker compose file - for runing with docker 🗃
 
