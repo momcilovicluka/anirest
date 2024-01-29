@@ -20,9 +20,9 @@ public class ApiGatewayConfig {
 		return builder.routes()
 		.route(p -> p.path("/auth/**").uri("lb://register"))
 		.route(p -> p.path("/user/**").uri("lb://register"))
+		.route(p -> p.path("/tags/**").uri("lb://tag"))
 		.route(p -> p.path("/anime/**").filters(f -> f.filter(authFilter().apply(new AuthFilter.Config()))).uri("lb://anime"))
 		.route(p -> p.path("/anime-list/**").filters(f -> f.filter(authFilter().apply(new AuthFilter.Config()))).uri("lb://anime-list"))
-		//.route(p -> p.path("/anime/**").uri("lb://anime"))
 		.build();
 	}
 }
