@@ -40,6 +40,19 @@ services:
     environment:
       - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka
 
+  tag:
+    image: momcilovicluka/anirest-tag:latest
+    mem_limit: 700m
+    ports:
+      - "38160:38160"
+    networks:
+      - anirest-network
+    depends_on:
+      - naming-server
+      - config-server
+    environment:
+      - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka
+
   api-gateway:
     image: momcilovicluka/anirest-api-gateway:latest
     mem_limit: 700m
