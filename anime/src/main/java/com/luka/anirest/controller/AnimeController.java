@@ -43,4 +43,10 @@ public class AnimeController {
 			throws BadAnilistRequestException, AnimeAlreadyExistsException {
 		return animeService.addAnime(anime.getTitle());
 	}
+	
+	@PostMapping("/addAnimeEmanuel")
+	public Anime addAnimeEmanuel(@RequestBody Anime anime) {
+		return animeService.addAnimeEmanuel(anime);
+	}
+	
 }

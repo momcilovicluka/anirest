@@ -121,7 +121,6 @@ public class AnimeService {
 		try {
 			payload = objectMapper.writeValueAsString(Map.of("query", animeQuery, "variables", variables));
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -138,9 +137,9 @@ public class AnimeService {
 			if (response == null || response.body() == null || response.body().contains("errors"))
 				throw new BadAnilistRequestException(response.body(), "Bad request to anilist api");
 		} catch (IOException ioe) {
-			throw new BadAnilistRequestException(null, "Bad request to anilist api");
+			throw new BadAnilistRequestException(null, "IO error with request to anilist api");
 		} catch (InterruptedException ie) {
-			throw new BadAnilistRequestException(null, "Bad request to anilist api");
+			throw new BadAnilistRequestException(null, "Interrupted request to anilist api");
 		}
 		System.out.println(response.body());
 
@@ -225,7 +224,6 @@ public class AnimeService {
 		try {
 			root = objectMapper.readTree(response.body());
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -266,10 +264,6 @@ public class AnimeService {
 				anime.setGenres(new ArrayList<Genre>());
 			if (!anime.getGenres().contains(genre)) {
 				anime.getGenres().add(genre);
-				// Anime_has_Genre anime_has_Genre = new Anime_has_Genre();
-				// anime_has_Genre.setAnime(anime);
-				// anime_has_Genre.setGenre(genre);
-				// animeHasGenreRepository.save(anime_has_Genre);
 			}
 		}
 		JsonNode tagsNode = root.path("data").path("Media").path("tags");
@@ -296,10 +290,6 @@ public class AnimeService {
 				anime.setTags(new ArrayList<Tag>());
 			if (!anime.getTags().contains(tag)) {
 				anime.getTags().add(tag);
-				// Anime_has_Tag anime_has_Tag = new Anime_has_Tag();
-				// anime_has_Tag.setAnime(anime);
-				// anime_has_Tag.setTag(tag);
-				// animeHasTagRepository.save(anime_has_Tag);
 			}
 		}
 		anime.setAverageScore(root.path("data").path("Media").path("averageScore").asInt());
@@ -327,5 +317,9 @@ public class AnimeService {
 	public Anime returnAnime(int id) throws BadAnilistRequestException {
 		Anime anime = animeRepository.findById(id).get();
 		return returnAnime(anime.getTitle());
+	}
+
+	public Anime addAnimeEmanuel(Anime anime) {
+		return animeRepository.save(anime);
 	}
 }
