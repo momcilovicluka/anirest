@@ -89,6 +89,11 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+					<image>
+						<name>
+							momcilovicluka/anirest-anime-list:latest
+						</name>
+					</image>
 				</configuration>
 			</plugin>
 		</plugins>
