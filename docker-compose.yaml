@@ -11,6 +11,7 @@ services:
     depends_on:
       - naming-server
       - config-server
+      - db
     environment:
       - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka
 
@@ -24,6 +25,7 @@ services:
     depends_on:
       - naming-server
       - config-server
+      - db
     environment:
       - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka
 
@@ -37,6 +39,7 @@ services:
     depends_on:
       - naming-server
       - config-server
+      - db
     environment:
       - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka
 
@@ -50,6 +53,7 @@ services:
     depends_on:
       - naming-server
       - config-server
+      - db
     environment:
       - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka
 
@@ -62,6 +66,7 @@ services:
       - anirest-network
     depends_on:
       - naming-server
+      - db
     environment:
       - eureka.client.service-url.defaultZone=http://naming-server:8761/eureka
 
@@ -80,6 +85,37 @@ services:
     mem_limit: 700m
     ports:
       - "8761:8761"
+    networks:
+      - anirest-network
+  
+  db:
+    image: mysql:latest
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: anime
+      MAX_ALLOWED_PACKET: 1024M
+    ports:
+      - "3306:3306"
+    networks:
+      - anirest-network
+    volumes:
+      - ./Database/my.cnf:/etc/mysql/my.cnf
+      - ./Database/dump.sql:/docker-entrypoint-initdb.d/init.sql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      UPLOAD_LIMIT: 100M
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/anime
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    ports:
+      - "8082:80"
+    depends_on:
+      - db
     networks:
       - anirest-network
 
