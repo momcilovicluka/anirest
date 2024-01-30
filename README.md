@@ -17,5 +17,6 @@ REST api for anime. Faculty project for CBD/RZK
 - **[tag](/tag)**: Tag service for detailed info about... you guessed it. Tags! 🏷️ ↔ **[🐳 Docker Image](https://hub.docker.com/repository/docker/momcilovicluka/anirest-tag/general)**
 - **[anirest.postman_collection.json](https://www.postman.com/lukamomcilovic/workspace/anirest/collection/32372801-abd71715-5aad-4eba-9cd5-f6dff30ac14f)**: Import for testing with Postman ☑
 - **[docker-compose](/docker-compose.yaml)**: Docker compose file - for runing with docker 🗃
+- **[runAll.sh](runAll.sh)**: Script that allows easy startup of all necessary services ⏩
 
 Feel free to explore and contribute to the project! If you have any suggestions or improvements, please open an issue or submit a pull request.
