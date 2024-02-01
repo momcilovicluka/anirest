@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "abd71715-5aad-4eba-9cd5-f6dff30ac14f",
 		"name": "anirest",
-		"description": "API Testing",
+		"description": "Anirest is a Spring Boot based REST microservice application that allows users to register, see info about anime, create their lists, and add anime to lists",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "32372801",
 		"_collection_link": "https://www.postman.com/lukamomcilovic/workspace/anirest/collection/32372801-abd71715-5aad-4eba-9cd5-f6dff30ac14f?action=share&source=collection_link&creator=32372801"
@@ -13,6 +13,52 @@
 			"item": [
 				{
 					"name": "user/register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 409\", function () {",
+									"  pm.response.to.have.status(409);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has required fields\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.message).to.exist;",
+									"    pm.expect(responseData.user).to.exist;",
+									"    pm.expect(responseData.repoUser).to.exist;",
+									"});",
+									"",
+									"",
+									"pm.test(\"User ID should be a non-zero integer\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.user.idUser).to.be.a('number');",
+									"    pm.expect(responseData.user.idUser).to.be.above(0, \"User ID should be non-zero\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Email is in a valid format\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.user.email).to.match(/^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$/);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Role is a non-empty string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.user.role).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Role should not be empty\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -36,7 +82,8 @@
 								"user",
 								"register"
 							]
-						}
+						},
+						"description": "Allows user to register by entering information. Validation is performed to check for the correctness of information provided"
 					},
 					"response": [
 						{
@@ -267,6 +314,39 @@
 				},
 				{
 					"name": "user/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status code is 200', function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"})",
+									"",
+									"pm.test('Email is in a valid format', function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData.email).to.match(/^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$/, 'Email is not in a valid format');",
+									"})",
+									"",
+									"pm.test('Username is a non-empty string', function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData.username).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, 'Username should not be empty');",
+									"})",
+									"",
+									"pm.test('Role is one of the expected values', function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.role).to.exist.and.to.be.oneOf([",
+									"        'admin',",
+									"        'user',",
+									"\t\t'USER'",
+									"    ]);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -290,7 +370,8 @@
 								"user",
 								"login"
 							]
-						}
+						},
+						"description": "Login call returns info about user"
 					},
 					"response": [
 						{
@@ -361,6 +442,46 @@
 				},
 				{
 					"name": "auth/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has the required field 'accessToken'\", function () {",
+									"  const responseData = pm.response.json();",
+									"  ",
+									"  pm.expect(responseData).to.be.an('object');",
+									"  pm.expect(responseData.accessToken).to.exist;",
+									"});",
+									"",
+									"",
+									"pm.test(\"Access token should not be empty\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.accessToken).to.exist.and.to.not.be.empty;",
+									"});",
+									"",
+									"",
+									"pm.test(\"Access token should be a string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.accessToken).to.be.a('string');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"  pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -387,7 +508,8 @@
 								"auth",
 								"login"
 							]
-						}
+						},
+						"description": "Generates and returns a token that shall be used for using other calls that require authorisation"
 					},
 					"response": [
 						{
@@ -456,7 +578,8 @@
 						}
 					]
 				}
-			]
+			],
+			"description": "API calls related to user interactions such as login, reigister, and authentification"
 		},
 		{
 			"name": "anime",
@@ -469,7 +592,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzA1NzYxNDgxLCJ1c2VybmFtZSI6ImJhbGRvanNhIiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.vcmFlYWjE7wkvwUoW7FhDbJ0JfuZeHEmfH1MZmalOdY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzA2OTAwMDI0LCJ1c2VybmFtZSI6ImJhbGRvanNhIiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.yFIuOxBr1RotdkHPcZ0ntBJ6-0lJ7FtBjI8cdUpBEmE",
 									"type": "string"
 								}
 							]
@@ -487,7 +610,8 @@
 								"anime",
 								"misfit of demon king academy"
 							]
-						}
+						},
+						"description": "Returns info about anime by provided name.\n\nFirst checks if there is such anime in the database, if not then returns info from anilist graphql api"
 					},
 					"response": []
 				},
@@ -569,7 +693,8 @@
 								"anime",
 								"addAnime"
 							]
-						}
+						},
+						"description": "Adds anime to database by fetching info from anilist graphql api"
 					},
 					"response": []
 				}
@@ -586,7 +711,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzA1NzYxNDgxLCJ1c2VybmFtZSI6ImJhbGRvanNhIiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.vcmFlYWjE7wkvwUoW7FhDbJ0JfuZeHEmfH1MZmalOdY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzA2OTAwMDI0LCJ1c2VybmFtZSI6ImJhbGRvanNhIiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.yFIuOxBr1RotdkHPcZ0ntBJ6-0lJ7FtBjI8cdUpBEmE",
 									"type": "string"
 								}
 							]
@@ -613,7 +738,8 @@
 								"anime-list",
 								"create"
 							]
-						}
+						},
+						"description": "Create a list"
 					},
 					"response": []
 				},
@@ -628,7 +754,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzA2NjQzOTUwLCJ1c2VybmFtZSI6ImJhbGRvanNhIiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.KpJ7eihgTZ_nbBd1KBPl_4P3UrEBfRiPagmh79K5wD0",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzA2OTAwMDI0LCJ1c2VybmFtZSI6ImJhbGRvanNhIiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.yFIuOxBr1RotdkHPcZ0ntBJ6-0lJ7FtBjI8cdUpBEmE",
 									"type": "string"
 								}
 							]
@@ -655,7 +781,8 @@
 								"anime-list",
 								"lists"
 							]
-						}
+						},
+						"description": "Returns users lists"
 					},
 					"response": []
 				},
@@ -694,7 +821,8 @@
 								"anime-list",
 								"addToList"
 							]
-						}
+						},
+						"description": "Add anime to list by providing ids"
 					},
 					"response": []
 				}
@@ -719,7 +847,8 @@
 								"tags",
 								"all"
 							]
-						}
+						},
+						"description": "Lists all tags"
 					},
 					"response": []
 				},
@@ -740,11 +869,13 @@
 								"page",
 								"1"
 							]
-						}
+						},
+						"description": "Lists 10 tags by page"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Information about tags"
 		}
 	]
 }
