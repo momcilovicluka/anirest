@@ -1,6 +1,5 @@
 package com.luka.anirest.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,13 +81,10 @@ public class AnimeListService {
 			if(anime1.getIdAnime() == anime.getIdAnime())
 				throw new AnimeAlreadyOnListException(anime, "Anime " + anime.getTitle() + " is already on the " + animeList.getTitle() + " list");
 		
-		animeList.setAnimes(new ArrayList<Anime>());
-		anime.setAnimeLists(new ArrayList<AnimeList>());
-		
 		animeList.addAnime(anime);
 		anime.addAnimeList(animeList);
 
-		animeProxy.addAnimeEmanuel(anime);
+		animeRepository.save(anime);
 		
 		return animeListRepository.save(animeList);
 	}

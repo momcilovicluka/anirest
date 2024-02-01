@@ -91,8 +91,8 @@ public class AnimeList implements Serializable {
 	public Anime addAnime(Anime anime) {
 		if(getAnimes() == null)
 			setAnimes(new ArrayList<Anime>());
-		getAnimes().add(anime);
-
+		animes.add(anime);
+		
 		return anime;
 	}
 
